@@ -34,13 +34,36 @@ Clean up one file:
 
     white my-source-file.rb
 
-Clean up all files in a directory:
+Clean up all (text) files in a directory:
 
     white path/to/source/files/
 
 Exclude certain files:
 
-    white source1.rb source2.rb path/to/sources/ --exclude vendor build tmp *~ *.html
+    white ./ --exclude vendor build tmp *~ *.html
+
+Switches:
+
+    white source.rb --
+
+
+Configuration
+-------------
+
+Add a `.white-config` file in the root directory of your project:
+
+    # uncomment options that you want to customize
+    #
+    # include: source/ rakefile README.md
+    # exclude: .*
+
+    # spaces_per_tab_by_file_extension:
+    #   rb: 2
+    #   coffee: 2
+
+Now it is enough to call `white` from the root directory of your project:
+
+    white
 
 
 Conventions
