@@ -40,7 +40,7 @@ Clean up all files in a directory:
 
 Exclude certain files:
 
-    white source1.rb source2.rb path/to/sources/ --exclude vendor build tmp *~
+    white source1.rb source2.rb path/to/sources/ --exclude vendor build tmp *~ *.html
 
 
 Conventions
