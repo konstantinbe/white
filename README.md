@@ -22,6 +22,10 @@ Install the `white` ruby gem:
 
     gem install white
 
+In case you haven't heard of the excellent Ruby Version Manager (RVM), I highly
+recommend using it to get rid of `sudo` and manage different ruby versions and
+gem sets. Check it out at: <http://rvm.beginrescueend.com/>.
+
 
 Getting Started
 ---------------
