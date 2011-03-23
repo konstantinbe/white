@@ -3,6 +3,12 @@ White
 
 `white` is a little command line utility to clean up whitespace in source files.
 
+What gets cleaned up?
+
+* Removes white spaces at the end of lines
+* Removes blank lines at the end of a file
+* Converts tabs to spaces (2 spaces by default)
+
 
 Getting Started
 ---------------
