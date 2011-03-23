@@ -19,6 +19,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'yaml'
+
 module White
 
+  def load_yaml_file(file_path)
+    File.open file_path, "rb" { |file| YAML::load(file.read) }
+  end
 end
