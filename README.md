@@ -9,27 +9,44 @@ What gets cleaned up?
 * Removes blank lines at the end of a file
 * Converts tabs to spaces (2 spaces by default)
 
+Backups?
+
+A backup file is saved for every file. By default, this backup files are
+automatically removed after the cleanup succeeded.
+
+
+Installation
+------------
+
+Install the `white` ruby gem:
+
+    gem install white
+
 
 Getting Started
 ---------------
 
-* TODO: document.
+Clean up one file:
+
+    white my-source-file.rb
+
+Clean up all files in a directory:
+
+    white path/to/source/files/
+
+Exclude certain files:
+
+    white source1.rb source2.rb path/to/sources/ --exclude vendor build tmp *~
 
 
 Conventions
 -----------
 
-* 2 spaces, no tabs
-* Use CamelCase notation for namespaces, classes, and mixins:
-  `Core.Extensions`, `RegularXmlParser`, `PartiallyFreezeable`
-* Use UPPERCASE notation for constants:
-  `Comparable.GREATER_THAN`
-* Use dashed notation for directories, files, and URLs: `milk/core-extensions`, `date-extensions.coffee`, `http://konstantinbender.com/blog/introducing-the-milk-framework`
-* Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`, `regular-xml-parser`
-* Use underscore notation for everything else (variables, functions, properties,
-  methods, JSON, ...):
-  `number_of_items`, `compute_number_of_items()`
-* No *arbitrary* abbreviations, such as `src`, `mod`, `obj`, ...
+* Use dashed notation for directories, files, and URLs: `milk/core-extensions`,
+  `date-extensions.coffee`, `http://konstantinbender.com/blog/introducing-the-milk-framework`
+* Use dashed notation for XML, HTML and CSS: `person-name`, `table-of-people`,
+  `regular-xml-parser`
+* No *arbitrary* abbreviations, such as `src`, `mod`, `lib`, `obj`, ...
 
 
 Changelog
