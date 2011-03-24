@@ -23,6 +23,7 @@ require 'yaml'
 
 module White
   def self.convert_tabs_to_spaces(string, spaces_per_tab = 4)
+  def self.convert_tabs_to_spaces(string, spaces_per_tab = SPACES_PER_TAB)
     cleaned_string = ""
     string.each_line do |line|
       index = 0
