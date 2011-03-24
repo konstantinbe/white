@@ -34,5 +34,11 @@ describe "White" do
       White.convert_tabs_to_spaces("\t", 2).should == "  "
       White.convert_tabs_to_spaces("\t\t\t", 2).should == "      "
     end
+
+    it "handles tab and space mixes properly" do
+      White.convert_tabs_to_spaces("  \t", 2).should == "    "
+      White.convert_tabs_to_spaces("   \t", 2).should == "    "
+      White.convert_tabs_to_spaces("\t ", 2).should == "   "
+    end
   end
 end
