@@ -36,7 +36,4 @@ module White
     cleaned_string
   end
 
-  def self.load_yaml_file(file_path)
-    File.open(file_path, "rb") { |file| YAML::load(file.read) }
-  end
 end
