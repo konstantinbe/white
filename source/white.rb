@@ -22,8 +22,21 @@
 require 'yaml'
 
 module White
+  def self.convert_tabs_to_spaces(string, spaces_per_tab = 4)
+    cleaned_string = ""
+    string.each_line do |line|
+      index = 0
+      while true
+        index = line.index "\t"
+        break if index == nil
+        line[index] = " " * (spaces_per_tab - index % spaces_per_tab)
+      end
+      cleaned_string << line
+    end
+    cleaned_string
+  end
 
-  def load_yaml_file(file_path)
-    File.open file_path, "rb" { |file| YAML::load(file.read) }
+  def self.load_yaml_file(file_path)
+    File.open(file_path, "rb") { |file| YAML::load(file.read) }
   end
 end

@@ -19,6 +19,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-describe "white" do
+$: << File.join(File.dirname(__FILE__), "/../source")
 
+require 'white'
+
+describe "White" do
+  describe "convert_tabs_to_spaces(string, spaces_per_tab = 4)" do
+    it "replaces each indentation tab with 4 spaces" do
+      White.convert_tabs_to_spaces("\t").should == "    "
+      White.convert_tabs_to_spaces("\t\t\t").should == "            "
+    end
+
+    it "replaces each indentation tab with N spaces" do
+      White.convert_tabs_to_spaces("\t", 2).should == "  "
+      White.convert_tabs_to_spaces("\t\t\t", 2).should == "      "
+    end
+  end
 end
