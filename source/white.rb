@@ -19,11 +19,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'yaml'
-
 module White
-  def self.convert_tabs_to_spaces(string, spaces_per_tab = 4)
-  def self.convert_tabs_to_spaces(string, spaces_per_tab = SPACES_PER_TAB)
+  def parse_options(args)
+
+  end
+
+  def find_files_to_be_cleaned(args)
+
+  end
+
+  def generate_config_for(paths, options)
+
+  end
+
+  def convert_tabs_to_spaces(string, spaces_per_tab = 4)
     cleaned_string = ""
     string.each_line do |line|
       index = 0
@@ -37,4 +46,19 @@ module White
     cleaned_string
   end
 
+  def clean_end_of_line(string, pattern, replacement)
+
+  end
+
+  def clean_end_of_file(string, pattern, replacement)
+
+  end
+
+  def read_from(path)
+    IO.read path
+  end
+
+  def write_to(path, string)
+    File.open(path, "w") { |file| file.write string }
+  end
 end
