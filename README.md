@@ -38,13 +38,8 @@ Clean up all (text) files in a directory:
 
     white path/to/source/files/
 
-Exclude certain files:
-
-    white ./ --exclude vendor build tmp *~ *.html
-
-Switches:
-
-    white source.rb --
+By default, `white` uses 2 spaces per tab for Ruby and CoffeeScript files, and
+4 spaces per tab for the rest.
 
 
 Configuration
