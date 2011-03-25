@@ -20,6 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'find'
 require 'optparse'
 
-options = {}
+options = parse_options ARGV
+paths = find_files_to_be_cleaned ARGV
+configs_per_path = generate_config_for paths, options
+
+configs_per_path.each_pair do |path, config|
+  original = read_from path
+  cleaned = original.clone
+  convert_tabs_to_spaces cleaned, config[:spaces_per_tab] if config[:tabs_to_spaces]
+  clean_end_of_line cleaned, config[:pattern], config[:replacement] if config[:clean_end_of_line]
+  clean_end_of_file cleaned, config[:pattern], config[:replacement] if config[:clean_end_of_fine]
+  write_to path, cleaned if cleaned != original
+end
