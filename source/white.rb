@@ -56,6 +56,7 @@ module White
 
   def find_files_to_be_cleaned(search_paths)
     paths = []
+    search_paths << "." if search_paths.size == 0
     search_paths.each do |search_path|
       Find.find(search_path) do |path|
         Find.prune if File.directory?(path) && path.match(EXCLUDE_REGEXP)
