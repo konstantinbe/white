@@ -22,6 +22,29 @@
 module White
   BACKUP_EXTENSION = "white-backup"
   EXCLUDE_REGEXP = /\.(app|xcdatamodeld|git)/
+  SPACES_PER_TAB = 4
+
+  CONFIGS = {}
+
+  CONFIGS[:default] = {}
+  CONFIGS[:default][:spaces_per_tab] = SPACES_PER_TAB
+  CONFIGS[:default][:convert_tab_to_spaces] = true
+  CONFIGS[:default][:clean_end_of_line] = true
+  CONFIGS[:default][:clean_end_of_file] = true
+  CONFIGS[:default][:end_of_line_pattern] = /( |\t)+$/
+  CONFIGS[:default][:end_of_line_replacement] = ''
+  CONFIGS[:default][:end_of_file_pattern] = /\s*\z/
+  CONFIGS[:default][:end_of_file_replacement] = '\n'
+
+  CONFIGS[:markdown] = {}
+  CONFIGS[:markdown][:end_of_line_pattern] = /( |\t)+$/
+  CONFIGS[:markdown][:end_of_line_replacement] = ''
+
+  CONFIGS[:ruby] = {}
+  CONFIGS[:ruby][:spaces_per_tab] = 2
+
+  CONFIGS[:coffee_script] = {}
+  CONFIGS[:coffee_script][:spaces_per_tab] = 2
 
   def parse_options(args)
    options = {}
@@ -44,7 +67,7 @@ module White
     {}
   end
 
-  def convert_tabs_to_spaces(string, spaces_per_tab = 4)
+  def convert_tabs_to_spaces(string, spaces_per_tab = SPACES_PER_TAB)
     cleaned_string = ""
     string.each_line do |line|
       index = 0
