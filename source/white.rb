@@ -73,7 +73,7 @@ module White
     paths.each do |path|
       default_config = CONFIGS[:default].clone
       type = type_of path
-      custom_config = if type then CONFIGS[type.to_sym] else {} end
+      custom_config = if type then CONFIGS[type.to_sym] || {} else {} end
       configs[path] = default_config.merge(custom_config).merge(options)
     end
     configs
