@@ -18,6 +18,8 @@ automatically removed after the cleanup succeeded.
 Installation
 ------------
 
+**Prerequisites**: White requires *Ruby* and *RubyGems* to be installed.
+
 Install the `white` ruby gem:
 
     gem install white
