@@ -21,7 +21,7 @@
 
 module White
   BACKUP_EXTENSION = "white-backup"
-  EXCLUDE_REGEXP = /\.(app|xcdatamodeld|git)/
+  EXCLUDE_REGEXP = /\.(app|xcdatamodeld|git)$/
   SPACES_PER_TAB = 4
 
   CONFIGS = {}
@@ -31,13 +31,15 @@ module White
   CONFIGS[:default][:convert_tab_to_spaces] = true
   CONFIGS[:default][:clean_end_of_line] = true
   CONFIGS[:default][:clean_end_of_file] = true
-  CONFIGS[:default][:end_of_line_pattern] = /( |\t)+$/
+  CONFIGS[:default][:end_of_line_pattern] = /[ |\t]+$/
   CONFIGS[:default][:end_of_line_replacement] = ''
   CONFIGS[:default][:end_of_file_pattern] = /\s*\z/
   CONFIGS[:default][:end_of_file_replacement] = '\n'
 
+  # don't remove exact two spaces at end of line in
+  # markdown documents because they denote a line break
   CONFIGS[:markdown] = {}
-  CONFIGS[:markdown][:end_of_line_pattern] = /( |\t)+$/
+  CONFIGS[:markdown][:end_of_line_pattern] = /(?<!\s)([ \t]|[ \t][ \t][ \t]+)$/
   CONFIGS[:markdown][:end_of_line_replacement] = ''
 
   CONFIGS[:ruby] = {}
@@ -64,7 +66,14 @@ module White
   end
 
   def generate_config_for(paths, options)
-    {}
+    configs = {}
+    paths.each do |path|
+      default_config = CONFIGS[:default].clone
+      type = type_of path
+      custom_config = if type then CONFIGS[type.to_sym] else {} end
+      configs[path] = default_config.merge custom_config
+    end
+    configs
   end
 
   def convert_tabs_to_spaces(string, spaces_per_tab = SPACES_PER_TAB)
@@ -82,11 +91,11 @@ module White
   end
 
   def clean_end_of_line(string, pattern, replacement)
-    string
+    string.gsub pattern, replacement
   end
 
   def clean_end_of_file(string, pattern, replacement)
-    string
+    string.gsub pattern, replacement
   end
 
   def read_from(path)
@@ -95,6 +104,27 @@ module White
 
   def write_to(path, string)
     File.open(path, "w") { |file| file.write string }
+  end
+
+  def type_of(path)
+    name = File.basename(path).downcase
+    extension = File.extname(path).downcase
+
+    if extension.size == 0
+      case name
+      when 'rakefile' then 'ruby'
+      when 'cakefile' then 'coffee_script'
+      else nil
+      end
+    else
+      case extension
+      when '.rb' then 'ruby'
+      when '.coffee' then 'coffee_script'
+      when '.md', '.mdown', '.markdown' then 'markdown'
+      when '.htm', '.html' then 'html'
+      else nil
+      end
+    end
   end
 end
 
