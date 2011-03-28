@@ -41,5 +41,8 @@ configs_per_path.each_pair do |path, config|
 
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
+    system "cp #{path} #{path}.#{BACKUP_EXTENSION}"
+    write_to path, cleaned
+    system "rm #{path}.#{BACKUP_EXTENSION}"
   end
 end
