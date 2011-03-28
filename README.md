@@ -38,27 +38,19 @@ Clean up all (text) files in a directory:
 
     white path/to/source/files/
 
+Clean up all files in the current working directory
+
+    white
+
 By default, `white` uses 2 spaces per tab for *Ruby* and *CoffeeScript* files,
 and 4 spaces per tab for the rest.
 
 
 Configuration
--------------
+--------------
 
-Add a `.white-config` file in the root directory of your project:
-
-    # uncomment options that you want to customize
-    #
-    # include: source/ rakefile README.md
-    # exclude: .*
-
-    # spaces_per_tab_by_file_extension:
-    #   rb: 2
-    #   coffee: 2
-
-Now it is enough to call `white` from the root directory of your project:
-
-    white
+As of release 0.1 it is not possible to customize the behavior. Feel free to
+fork, implement and make a pull request.
 
 
 Conventions
@@ -74,7 +66,10 @@ Conventions
 Changelog
 ---------
 
-* TODO: document.
+
+### White 0.1
+
+* First release.
 
 
 License
