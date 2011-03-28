@@ -31,10 +31,10 @@ module White
   CONFIGS[:default][:convert_tab_to_spaces] = true
   CONFIGS[:default][:clean_end_of_line] = true
   CONFIGS[:default][:clean_end_of_file] = true
-  CONFIGS[:default][:end_of_line_pattern] = /[ |\t]+$/
+  CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
   CONFIGS[:default][:end_of_line_replacement] = ''
   CONFIGS[:default][:end_of_file_pattern] = /\s*\z/
-  CONFIGS[:default][:end_of_file_replacement] = '\n'
+  CONFIGS[:default][:end_of_file_replacement] = "\n"
 
   # don't remove exact two spaces at end of line in
   # markdown documents because they denote a line break
