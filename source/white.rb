@@ -20,12 +20,24 @@
 # THE SOFTWARE.
 
 module White
+  BACKUP_EXTENSION = "white-backup"
+  EXCLUDE_REGEXP = /\.(app|xcdatamodeld|git)/
+
   def parse_options(args)
-    {}
+   options = {}
   end
 
-  def find_files_to_be_cleaned(args)
-    []
+  def find_files_to_be_cleaned(search_paths)
+    paths = []
+    search_paths.each do |search_path|
+      Find.find(search_path) do |path|
+        Find.prune if File.directory?(path) && path.match(EXCLUDE_REGEXP)
+        is_text_file = `file #{path}`.match /text/
+        should_be_included = !path.match(EXCLUDE_REGEXP)
+        paths << path if is_text_file && should_be_included
+      end
+    end
+    paths
   end
 
   def generate_config_for(paths, options)
