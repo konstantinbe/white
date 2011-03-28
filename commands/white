@@ -29,7 +29,6 @@ require 'white'
 options = parse_options ARGV
 paths = find_files_to_be_cleaned ARGV
 configs_per_path = generate_config_for paths, options
-puts configs_per_path
 
 configs_per_path.each_pair do |path, config|
   original = read_from path
@@ -41,8 +40,13 @@ configs_per_path.each_pair do |path, config|
 
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
-    system "cp #{path} #{path}.#{BACKUP_EXTENSION}"
+
+    success = system "cp #{path} #{path}.#{BACKUP_EXTENSION}"
+    fail "[ERROR] Could not backup #{path}" unless success
+
     write_to path, cleaned
-    system "rm #{path}.#{BACKUP_EXTENSION}"
+
+    success = system "rm #{path}.#{BACKUP_EXTENSION}"
+    fail "[ERROR] Could not remove backup for #{path}" unless success
   end
 end
