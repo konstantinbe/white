@@ -21,15 +21,15 @@
 
 module White
   def parse_options(args)
-
+    {}
   end
 
   def find_files_to_be_cleaned(args)
-
+    []
   end
 
   def generate_config_for(paths, options)
-
+    {}
   end
 
   def convert_tabs_to_spaces(string, spaces_per_tab = 4)
@@ -47,11 +47,11 @@ module White
   end
 
   def clean_end_of_line(string, pattern, replacement)
-
+    string
   end
 
   def clean_end_of_file(string, pattern, replacement)
-
+    string
   end
 
   def read_from(path)
@@ -62,3 +62,5 @@ module White
     File.open(path, "w") { |file| file.write string }
   end
 end
+
+include White
