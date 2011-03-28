@@ -21,26 +21,27 @@
 
 module White
   BACKUP_EXTENSION = "white-backup"
-  EXCLUDE_REGEXP = /\.(app|xcdatamodeld|git)$/
+  EXCLUDE_REGEXP = /\.(app|xcdatamodeld|xib|xcodeproj|git)$/i
   SPACES_PER_TAB = 4
 
   CONFIGS = {}
 
   CONFIGS[:default] = {}
   CONFIGS[:default][:spaces_per_tab] = SPACES_PER_TAB
-  CONFIGS[:default][:convert_tab_to_spaces] = true
+  CONFIGS[:default][:convert_tabs_to_spaces] = true
   CONFIGS[:default][:clean_end_of_line] = true
   CONFIGS[:default][:clean_end_of_file] = true
   CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
   CONFIGS[:default][:end_of_line_replacement] = ''
-  CONFIGS[:default][:end_of_file_pattern] = /\s+\z/
-  CONFIGS[:default][:end_of_file_replacement] = "\n"
+  CONFIGS[:default][:end_of_file_pattern] = /(.*\S)\s*\Z/
+  CONFIGS[:default][:end_of_file_replacement] = '\1' + "\n"
 
-  # don't remove exact two spaces at end of line in
-  # markdown documents because they denote a line break
+  # Two or more spaces at the end of line denote an intentional
+  # line break in markdown documents. nsert exactly two spaces
+  # for two or more spaces or remove single spaces.
   CONFIGS[:markdown] = {}
-  CONFIGS[:markdown][:end_of_line_pattern] = /(?<!\s)([ \t]|[ \t][ \t][ \t]+)$/
-  CONFIGS[:markdown][:end_of_line_replacement] = ''
+  CONFIGS[:markdown][:end_of_line_pattern] = /(.*?(?:  )?)[ \t]+$/
+  CONFIGS[:markdown][:end_of_line_replacement] = '\1'
 
   CONFIGS[:ruby] = {}
   CONFIGS[:ruby][:spaces_per_tab] = 2
@@ -49,7 +50,8 @@ module White
   CONFIGS[:coffee_script][:spaces_per_tab] = 2
 
   def parse_options(args)
-   options = {}
+    # TODO: implement.
+    options = {}
   end
 
   def find_files_to_be_cleaned(search_paths)
@@ -65,13 +67,13 @@ module White
     paths
   end
 
-  def generate_config_for(paths, options)
+  def generate_config_for(paths, options = {})
     configs = {}
     paths.each do |path|
       default_config = CONFIGS[:default].clone
       type = type_of path
       custom_config = if type then CONFIGS[type.to_sym] else {} end
-      configs[path] = default_config.merge custom_config
+      configs[path] = default_config.merge(custom_config).merge(options)
     end
     configs
   end
@@ -107,24 +109,18 @@ module White
   end
 
   def type_of(path)
-    name = File.basename(path).downcase
-    extension = File.extname(path).downcase
-
-    if extension.size == 0
-      case name
-      when 'rakefile' then 'ruby'
-      when 'cakefile' then 'coffee_script'
-      else nil
-      end
-    else
-      case extension
-      when '.rb' then 'ruby'
-      when '.coffee' then 'coffee_script'
-      when '.md', '.mdown', '.markdown' then 'markdown'
-      when '.htm', '.html' then 'html'
-      else nil
-      end
+    type = case File.extname(path).downcase
+    when '.rb' then 'ruby'
+    when '.coffee' then 'coffee_script'
+    when '.md', '.mdown', '.markdown' then 'markdown'
+    when '.htm', '.html' then 'html'
     end
+
+    type ||= case File.basename(path).downcase
+    when 'rakefile' then 'ruby'
+    when 'cakefile' then 'coffee_script'
+    end
+    type
   end
 end
 
