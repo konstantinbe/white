@@ -40,10 +40,6 @@ Clean up all (text) files in a directory:
 
     white path/to/source/files/
 
-Clean up all files in the current working directory
-
-    white
-
 By default, `white` uses 2 spaces per tab for *Ruby* and *CoffeeScript* files,
 and 4 spaces per tab for the rest.
 
