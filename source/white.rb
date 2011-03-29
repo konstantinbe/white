@@ -50,7 +50,12 @@ module White
   CONFIGS[:coffee_script][:spaces_per_tab] = 2
 
   def parse_options(args)
-    # TODO: implement.
+    fail "Usage: white PATH [PATH ...]" if args.size == 0
+
+    args.each do |path|
+      fail "Could not find file or directory at: #{path}" unless File.exists?(path)
+    end
+
     options = {}
   end
 
@@ -121,6 +126,11 @@ module White
     when 'cakefile' then 'coffee_script'
     end
     type
+  end
+
+  def fail(message, error_code = 1)
+    puts message
+    exit error_code
   end
 end
 
