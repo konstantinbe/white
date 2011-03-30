@@ -21,7 +21,7 @@
 
 module White
   BACKUP_EXTENSION = "white-backup"
-  EXCLUDE_REGEXP = /(externals\/|vendor\/|build\/|tmp\/|wiki\/)|(\.(app|xcdatamodeld|xib|xcodeproj|git))$/i
+  EXCLUDE_REGEXP = /(externals\/|vendor\/|build\/|tmp\/|wiki\/)|(\.(app|xcdatamodeld|xib|xcodeproj|git|xcconfig|plist|graffle))$/i
   SPACES_PER_TAB = 4
 
   CONFIGS = {}
