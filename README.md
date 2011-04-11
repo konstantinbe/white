@@ -20,13 +20,8 @@ Installation
 
 **Prerequisites**: White requires *Ruby* and *RubyGems* to be installed.
 
-Install the `white` ruby gem:
-
-    gem install white
-
-In case you haven't heard of the excellent Ruby Version Manager (RVM), I highly
-recommend using it to get rid of `sudo` and manage different ruby versions and
-gem sets. Check it out at: <http://rvm.beginrescueend.com/>.
+White is currently in alpha stage and is not available as a gem yet. To install,
+clone this repository and add the commands/ directory to your path.
 
 
 Getting Started
@@ -64,10 +59,9 @@ Conventions
 Changelog
 ---------
 
+### White 0.1 - Underway
 
-### White 0.1
-
-* First release.
+* TODO: add.
 
 
 License
