@@ -1,5 +1,4 @@
-White
------
+# White
 
 *White* is a little command line utility to clean up whitespace in source files.
 
@@ -14,18 +13,14 @@ Backups?
 A backup file is saved for every file. By default, this backup files are
 automatically removed after the cleanup succeeded.
 
-
-Installation
-------------
+## Installation
 
 **Prerequisites**: White requires *Ruby* and *RubyGems* to be installed.
 
-White is currently in alpha stage and is not available as a gem yet. To install,
-clone this repository and add the commands/ directory to your path.
+White is currently in alpha stage and is not available as a gem yet. Just place
+the script somewhere on your file system and put it into your path.
 
-
-Getting Started
----------------
+## Getting Started
 
 Clean up one file:
 
@@ -38,16 +33,13 @@ Clean up all (text) files in a directory:
 By default, `white` uses 2 spaces per tab for *Ruby* and *CoffeeScript* files,
 and 4 spaces per tab for the rest.
 
+## Configuration
 
-Configuration
---------------
+As of release 0.1 it is not possible to customize the behavior other than
+editing the script directly. Feel free to fork, implement and make a pull
+request.
 
-As of release 0.1 it is not possible to customize the behavior. Feel free to
-fork, implement and make a pull request.
-
-
-Conventions
------------
+## Conventions
 
 * Use dashed notation for directories, files, and URLs: `milk/core-extensions`,
   `date-extensions.coffee`, `http://konstantinbender.com/blog/introducing-the-milk-framework`
@@ -56,16 +48,13 @@ Conventions
 * No *arbitrary* abbreviations, such as `src`, `mod`, `lib`, `obj`, ...
 
 
-Changelog
----------
+## Changelog
 
-### White 0.1 - Underway
+### White 0.1 - Draft
 
 * TODO: add.
 
-
-License
--------
+## License
 
 Released under the MIT license.
 
