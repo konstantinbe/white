@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-$: << File.join(File.dirname(__FILE__), "/../source")
-
 require 'find'
 require 'optparse'
 
@@ -43,9 +41,10 @@ CONFIGS[:default][:end_of_line_replacement] = ''
 CONFIGS[:default][:end_of_file_pattern] = /(.*\S)\s*\Z/
 CONFIGS[:default][:end_of_file_replacement] = '\1' + "\n"
 
-# Two or more spaces at the end of line denote an intentional
-# line break in markdown documents. nsert exactly two spaces
-# for two or more spaces or remove single spaces.
+# Two or more spaces at the end of line denote an intentional line break in
+# markdown documents. Insert exactly two spaces for two or more spaces or
+# remove single spaces.
+
 CONFIGS[:markdown] = {}
 CONFIGS[:markdown][:end_of_line_pattern] = /(.*?(?:  )?)[ \t]+$/
 CONFIGS[:markdown][:end_of_line_replacement] = '\1'

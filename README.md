@@ -15,8 +15,6 @@ automatically removed after the cleanup succeeded.
 
 ## Installation
 
-**Prerequisites**: White requires *Ruby* and *RubyGems* to be installed.
-
 White is currently in alpha stage and is not available as a gem yet. Just place
 the script somewhere on your file system and put it into your path.
 
@@ -38,6 +36,11 @@ and 4 spaces per tab for the rest.
 As of release 0.1 it is not possible to customize the behavior other than
 editing the script directly. Feel free to fork, implement and make a pull
 request.
+
+## Known Issues
+
+* Intentional two spaces for markdown documents are sometimes cleaned even
+  though they shouldn't be.
 
 ## Conventions
 
