@@ -4,8 +4,7 @@ IFS=$'\n' # crazy black shell magic
 
 files=""
 for file in $(git status --porcelain | cut -c 4-); do
-   test -f "$file" && files="$file $files"
+   test -f "$file" && files="\"$file\" $files"
 done
 
-IFS=$' ' # crazy black shell magic
-white $files
+echo "white $files" | /bin/bash
