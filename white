@@ -58,7 +58,7 @@ CONFIGS[:coffee_script][:spaces_per_tab] = 2
 # ------------------------------------------------------------- functions ------
 
 def parse_options(args)
-  fail "Usage: white PATH [PATH ...]" if args.size == 0
+  fail "Usage: #{File.basename($0)} PATH [PATH ...]" if args.size == 0
 
   args.each do |path|
     fail "Could not find file or directory at: #{path}" unless File.exists?(path)
