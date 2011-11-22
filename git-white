@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'
+for file in $(git status --porcelain | cut -c 4-); do
+   test -f "$file" && white "$file"
+done

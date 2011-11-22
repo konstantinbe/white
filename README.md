@@ -31,6 +31,14 @@ Clean up all (text) files in a directory:
 By default, `white` uses 2 spaces per tab for *Ruby* and *CoffeeScript* files,
 and 4 spaces per tab for the rest.
 
+## Cleaning only Changed Files (Git)
+
+Make sure `white` and `git-white` scripts are in your path, then simply do:
+
+    git-white
+
+All changed files will be cleaned.
+
 ## Configuration
 
 As of release 0.1 it is not possible to customize the behavior other than
