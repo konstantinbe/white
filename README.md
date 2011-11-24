@@ -35,7 +35,7 @@ and 4 spaces per tab for the rest.
 
 Make sure `white` and `git-white` scripts are in your path, then simply do:
 
-    git-white
+    git white
 
 All changed files will be cleaned.
 
