@@ -28,6 +28,6 @@ relative_to_root_paths = `git status --ignore-submodules --porcelain | cut -c 4-
 absolute_paths = relative_to_root_paths.map { |path| File.expand_path(File.join(root_directory, path)) }
 relative_paths = absolute_paths.map { |path| Pathname.new(path).relative_path_from(working_directory).to_s }
 quoted_paths = relative_paths.map { |path| "\"#{path}\""}
-valid_paths = quoted_paths.select { |path| `test -f #{path}` }
+valid_paths = quoted_paths.select { |path| `test -f \"#{path}\"` }
 command = "white " + valid_paths.join(" ")
 system command
