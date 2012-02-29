@@ -159,17 +159,17 @@ configs_per_path.each_pair do |path, config|
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
 
-		absolute_path = File.expand_path(path)
+        absolute_path = File.expand_path(path)
     backup_path = File.join(BACKUP_FOLDER, absolute_path)
-		backup_folder_path = File.dirname backup_path
+        backup_folder_path = File.dirname backup_path
 
-		success = system "mkdir -p #{backup_folder_path}"
+        success = system "mkdir -p #{backup_folder_path}"
     fail "[ERROR] Could not create backup folder #{backup_folder_path}" unless success
 
-		system "test -f '#{backup_path}.previous-backup-2' && mv '#{backup_path}.previous-backup-2' '#{backup_path}.previous-backup-3'"
-		system "test -f '#{backup_path}.previous-backup-1' && mv '#{backup_path}.previous-backup-1' '#{backup_path}.previous-backup-2'"
-		system "test -f '#{backup_path}' && mv '#{backup_path}' '#{backup_path}.previous-backup-1'"
-    
+        system "test -f '#{backup_path}.previous-backup-2' && mv '#{backup_path}.previous-backup-2' '#{backup_path}.previous-backup-3'"
+        system "test -f '#{backup_path}.previous-backup-1' && mv '#{backup_path}.previous-backup-1' '#{backup_path}.previous-backup-2'"
+        system "test -f '#{backup_path}' && mv '#{backup_path}' '#{backup_path}.previous-backup-1'"
+
     success = system "cp -R '#{path}' '#{backup_path}'"
     fail "[ERROR] Could not backup #{path}" unless success
 
