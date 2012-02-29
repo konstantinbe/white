@@ -159,7 +159,7 @@ configs_per_path.each_pair do |path, config|
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
 
-		absolute_path = File.absolute_path(path)
+		absolute_path = File.expand_path(path)
     backup_path = File.join(BACKUP_FOLDER, absolute_path)
 		backup_folder_path = File.dirname backup_path
 
