@@ -47,6 +47,8 @@ request.
 
 ## Known Issues
 
+* `git-white` doesn't work properly when file names have spaces.
+
 * Intentional two spaces for markdown documents are sometimes cleaned even
   though they shouldn't be.
 
