@@ -115,7 +115,7 @@ def clean_end_of_file(string, pattern, replacement)
 end
 
 def read_from(path)
-  IO.read path
+  IO.binread path
 end
 
 def write_to(path, string)
