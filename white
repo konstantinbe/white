@@ -27,7 +27,7 @@ require 'optparse'
 
 BACKUP_FOLDER = "/tmp/white-backups"
 BACKUP_EXTENSION = ".white-backup"
-EXCLUDE_REGEXP = /(frameworks\/|externals\/|vendor\/|build\/|tmp\/|wiki\/)|(\.(app|xcdatamodeld|xcodeproj|git)\/)|(\.(graffle|xcdatamodel|storyboard|mobileprovision|xcconfig|xib|plist)$)/i
+EXCLUDE_REGEXP = /(frameworks\/|externals\/|vendor\/|build\/|tmp\/|wiki\/)|(\.(app|xcdatamodeld|xcodeproj|git)\/)|(\.(graffle|xcdatamodel|storyboard|mobileprovision|xcconfig|xib|plist|framework)$)/i
 SPACES_PER_TAB = 4
 
 CONFIGS = {}
