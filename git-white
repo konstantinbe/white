@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 
 require 'pathname'
+require 'shellwords'
 
 root_directory = `git rev-parse --git-dir`.chomp + "/.."
 working_directory = Pathname.pwd
@@ -29,10 +30,10 @@ relative_to_root_paths = git_status.scan(/^.. (?:(?:.*) -> )?(.*)$/).map { |arra
 absolute_paths = relative_to_root_paths.map { |path| File.expand_path(File.join(root_directory, path)) }
 relative_paths = absolute_paths.map { |path| Pathname.new(path).relative_path_from(working_directory).to_s }
 valid_paths = relative_paths.select { |path| File.file? path }
-valid_paths_quoted = valid_paths.map { |path| if path[0] == '"' then path else "\"#{path}\"" end }
+valid_paths_quoted = valid_paths.map { |path| Shellwords.escape path }
 
 if valid_paths_quoted.length > 0
-    command = "white " + valid_paths.join(" ")
+    command = "white " + valid_paths_quoted.join(" ")
     system command
 else
     puts "Nothing to be cleaned."
