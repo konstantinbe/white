@@ -73,7 +73,7 @@ def find_files_to_be_cleaned(search_paths)
   search_paths.each do |search_path|
     Find.find(search_path) do |path|
       Find.prune if File.directory?(path) and path.match(EXCLUDE_REGEXP)
-      is_text_file = !!`file "#{path}"`.match(/ text$/)
+      is_text_file = !!`file "#{path}"`.match(/ text/)
       is_excluded = !!path.match(EXCLUDE_REGEXP)
       paths << path if is_text_file and not is_excluded
     end
