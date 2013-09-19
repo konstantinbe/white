@@ -22,6 +22,7 @@
 
 require 'find'
 require 'optparse'
+require 'shellwords'
 
 # --------------------------------------------------------- configuration ------
 
@@ -73,7 +74,7 @@ def find_files_to_be_cleaned(search_paths)
   search_paths.each do |search_path|
     Find.find(search_path) do |path|
       Find.prune if File.directory?(path) and path.match(EXCLUDE_REGEXP)
-      is_text_file = !!`file "#{path}"`.match(/ text/)
+      is_text_file = !!`file #{escape path}`.match(/ text/)
       is_excluded = !!path.match(EXCLUDE_REGEXP)
       paths << path if is_text_file and not is_excluded
     end
@@ -142,6 +143,10 @@ def fail(message, error_code = 1)
   exit error_code
 end
 
+def escape(path)
+  Shellwords.escape path
+end
+
 # ---------------------------------------------------------------- script ------
 
 options = parse_options ARGV
@@ -159,18 +164,18 @@ configs_per_path.each_pair do |path, config|
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
 
-        absolute_path = File.expand_path(path)
+    absolute_path = File.expand_path(path)
     backup_path = File.join(BACKUP_FOLDER, absolute_path)
-        backup_folder_path = File.dirname backup_path
+    backup_folder_path = File.dirname backup_path
 
-        success = system "mkdir -p #{backup_folder_path}"
+    success = system "mkdir -p #{escape backup_folder_path}"
     fail "[ERROR] Could not create backup folder #{backup_folder_path}" unless success
 
-        system "test -f '#{backup_path}.previous-backup-2' && mv '#{backup_path}.previous-backup-2' '#{backup_path}.previous-backup-3'"
-        system "test -f '#{backup_path}.previous-backup-1' && mv '#{backup_path}.previous-backup-1' '#{backup_path}.previous-backup-2'"
-        system "test -f '#{backup_path}' && mv '#{backup_path}' '#{backup_path}.previous-backup-1'"
+    system "test -f '#{escape backup_path}.previous-backup-2' && mv '#{escape backup_path}.previous-backup-2' '#{escape backup_path}.previous-backup-3'"
+    system "test -f '#{escape backup_path}.previous-backup-1' && mv '#{escape backup_path}.previous-backup-1' '#{escape backup_path}.previous-backup-2'"
+    system "test -f '#{escape backup_path}' && mv '#{escape backup_path}' '#{escape backup_path}.previous-backup-1'"
 
-    success = system "cp -R '#{path}' '#{backup_path}'"
+    success = system "cp -R #{escape path} #{escape backup_path}"
     fail "[ERROR] Could not backup #{path}" unless success
 
     write_to path, cleaned
