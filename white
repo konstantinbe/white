@@ -57,6 +57,9 @@ CONFIGS[:ruby][:spaces_per_tab] = 2
 CONFIGS[:coffee_script] = {}
 CONFIGS[:coffee_script][:spaces_per_tab] = 2
 
+CONFIGS[:makefile] = {}
+CONFIGS[:makefile][:convert_tabs_to_spaces] = false
+
 # ------------------------------------------------------------- functions ------
 
 def parse_options(args)
@@ -134,6 +137,7 @@ def type_of(path)
   type ||= case File.basename(path).downcase
   when 'rakefile' then 'ruby'
   when 'cakefile' then 'coffee_script'
+  when 'makefile' then 'makefile'
   end
   type
 end
