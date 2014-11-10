@@ -40,8 +40,8 @@ CONFIGS[:default][:clean_end_of_line] = true
 CONFIGS[:default][:clean_end_of_file] = true
 CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
 CONFIGS[:default][:end_of_line_replacement] = ''
-CONFIGS[:default][:end_of_file_pattern] = /(.*\S)\s*\Z/
-CONFIGS[:default][:end_of_file_replacement] = '\1' + "\n"
+CONFIGS[:default][:end_of_file_pattern] = /(?<=\S)\s*\Z/
+CONFIGS[:default][:end_of_file_replacement] = "\n"
 
 # Two or more spaces at the end of line denote an intentional line break in
 # markdown documents. Insert exactly two spaces for two or more spaces or
