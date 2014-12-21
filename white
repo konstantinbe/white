@@ -36,8 +36,14 @@ CONFIGS = {}
 CONFIGS[:default] = {}
 CONFIGS[:default][:spaces_per_tab] = SPACES_PER_TAB
 CONFIGS[:default][:convert_tabs_to_spaces] = true
+CONFIGS[:default][:clean_beginning_of_file] = true
+CONFIGS[:default][:clean_empty_lines] = true
 CONFIGS[:default][:clean_end_of_line] = true
 CONFIGS[:default][:clean_end_of_file] = true
+CONFIGS[:default][:beginning_of_file_pattern] = /\A(\s*\n)+/
+CONFIGS[:default][:beginning_of_file_replacement] = ""
+CONFIGS[:default][:empty_lines_pattern] = /\n\s*\n\s*\n/
+CONFIGS[:default][:empty_lines_replacement] = "\n\n"
 CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
 CONFIGS[:default][:end_of_line_replacement] = ''
 CONFIGS[:default][:end_of_file_pattern] = /(?<=\S)\s*\Z/
@@ -54,8 +60,8 @@ CONFIGS[:markdown][:end_of_line_replacement] = '\1'
 CONFIGS[:ruby] = {}
 CONFIGS[:ruby][:spaces_per_tab] = 2
 
-CONFIGS[:coffee_script] = {}
-CONFIGS[:coffee_script][:spaces_per_tab] = 2
+CONFIGS[:coffee] = {}
+CONFIGS[:coffee][:spaces_per_tab] = 2
 
 CONFIGS[:makefile] = {}
 CONFIGS[:makefile][:convert_tabs_to_spaces] = false
@@ -110,7 +116,15 @@ def convert_tabs_to_spaces(string, spaces_per_tab = SPACES_PER_TAB)
   cleaned_string
 end
 
+def clean_beginning_of_file(string, pattern, replacement)
+  string.gsub pattern, replacement
+end
+
 def clean_end_of_line(string, pattern, replacement)
+  string.gsub pattern, replacement
+end
+
+def clean_empty_lines(string, pattern, replacement)
   string.gsub pattern, replacement
 end
 
@@ -162,6 +176,8 @@ configs_per_path.each_pair do |path, config|
 
   cleaned = original.clone
   cleaned = convert_tabs_to_spaces cleaned, config[:spaces_per_tab] if config[:convert_tabs_to_spaces]
+  cleaned = clean_beginning_of_file cleaned, config[:beginning_of_file_pattern], config[:beginning_of_file_replacement] if config[:clean_beginning_of_file]
+  cleaned = clean_empty_lines cleaned, config[:empty_lines_pattern], config[:empty_lines_replacement] if config[:clean_empty_lines]
   cleaned = clean_end_of_line cleaned, config[:end_of_line_pattern], config[:end_of_line_replacement] if config[:clean_end_of_line]
   cleaned = clean_end_of_file cleaned, config[:end_of_file_pattern], config[:end_of_file_replacement] if config[:clean_end_of_file]
 
