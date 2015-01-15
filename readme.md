@@ -4,6 +4,7 @@
 
 What gets cleaned up?
 
+* Collapses multple blank lines into one
 * Removes white spaces at the end of lines
 * Removes blank lines at the end of a file
 * Converts tabs to spaces
