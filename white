@@ -40,7 +40,7 @@ CONFIGS[:default][:clean_beginning_of_file] = true
 CONFIGS[:default][:clean_empty_lines] = true
 CONFIGS[:default][:clean_end_of_line] = true
 CONFIGS[:default][:clean_end_of_file] = true
-CONFIGS[:default][:clean_alignment_spaces] = true
+CONFIGS[:default][:clean_alignment_spaces] = false # experimental
 CONFIGS[:default][:beginning_of_file_pattern] = /\A(\s*\n)+/
 CONFIGS[:default][:beginning_of_file_replacement] = ""
 CONFIGS[:default][:empty_lines_pattern] = /\n\s*\n\s*\n/
@@ -49,7 +49,7 @@ CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
 CONFIGS[:default][:end_of_line_replacement] = ''
 CONFIGS[:default][:end_of_file_pattern] = /(?<=\S)\s*\Z/
 CONFIGS[:default][:end_of_file_replacement] = "\n"
-CONFIGS[:default][:alignment_spaces_pattern] = /(?<=\S ) +\S/
+CONFIGS[:default][:alignment_spaces_pattern] = /(?<=\S ) +(?=\S)/
 CONFIGS[:default][:alignment_spaces_replacement] = ""
 
 # Two or more spaces at the end of line denote an intentional line break in
