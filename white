@@ -40,6 +40,7 @@ CONFIGS[:default][:clean_beginning_of_file] = true
 CONFIGS[:default][:clean_empty_lines] = true
 CONFIGS[:default][:clean_end_of_line] = true
 CONFIGS[:default][:clean_end_of_file] = true
+CONFIGS[:default][:clean_alignment_spaces] = true
 CONFIGS[:default][:beginning_of_file_pattern] = /\A(\s*\n)+/
 CONFIGS[:default][:beginning_of_file_replacement] = ""
 CONFIGS[:default][:empty_lines_pattern] = /\n\s*\n\s*\n/
@@ -48,6 +49,8 @@ CONFIGS[:default][:end_of_line_pattern] = /[ \t]+$/
 CONFIGS[:default][:end_of_line_replacement] = ''
 CONFIGS[:default][:end_of_file_pattern] = /(?<=\S)\s*\Z/
 CONFIGS[:default][:end_of_file_replacement] = "\n"
+CONFIGS[:default][:alignment_spaces_pattern] = /(?<=\S ) +\S/
+CONFIGS[:default][:alignment_spaces_replacement] = ""
 
 # Two or more spaces at the end of line denote an intentional line break in
 # markdown documents. Insert exactly two spaces for two or more spaces or
@@ -132,6 +135,10 @@ def clean_end_of_file(string, pattern, replacement)
   string.gsub pattern, replacement
 end
 
+def clean_alignment_spaces(string, pattern, replacement)
+  string.gsub pattern, replacement
+end
+
 def read_from(path)
   IO.read path
 end
@@ -180,7 +187,7 @@ configs_per_path.each_pair do |path, config|
   cleaned = clean_empty_lines cleaned, config[:empty_lines_pattern], config[:empty_lines_replacement] if config[:clean_empty_lines]
   cleaned = clean_end_of_line cleaned, config[:end_of_line_pattern], config[:end_of_line_replacement] if config[:clean_end_of_line]
   cleaned = clean_end_of_file cleaned, config[:end_of_file_pattern], config[:end_of_file_replacement] if config[:clean_end_of_file]
-
+  cleaned = clean_alignment_spaces cleaned, config[:alignment_spaces_pattern], config[:alignment_spaces_replacement] if config[:clean_alignment_spaces]
   if cleaned != original
     puts "Cleaned up whitespace in: #{path}"
 
